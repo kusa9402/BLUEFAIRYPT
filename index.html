@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>길드 캐릭터 카드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;800&display=swap" rel="stylesheet">
+<style id="css">
+.gc{--blue:#2340ff;--bt:#2340ff;--soft:#e9ecff;--bg:#fff;--card:#fff;--ink:#0b0b10;--mute:#6b6b78;--line:#e6e6ec;display:block;background:var(--bg)!important;color:var(--ink)!important;font-family:'Noto Sans KR','Pretendard',-apple-system,'Segoe UI',sans-serif;font-size:16px;line-height:1.6;text-align:left;transition:background .35s,color .35s}
+.gc[data-mode="off"]{--bt:#7d92ff;--soft:#161a3c;--bg:#0c0d12;--card:#12131a;--ink:#fff;--mute:#8d8e9b;--line:#2a2b37}
+.gc *{box-sizing:border-box;margin:0;padding:0;font-family:inherit;letter-spacing:normal;text-transform:none;text-shadow:none;color:inherit!important}
+.gc[data-mode="on"] .x-off,.gc[data-mode="off"] .x-on{display:none!important}
+.gc .gc-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;background:var(--bg);border-bottom:1px solid var(--line)}
+.gc .gc-brand{font-size:12px;font-weight:800;letter-spacing:.22em}
+.gc .gc-brand b{color:var(--bt)!important}
+.gc .gc-sw{position:relative;flex:none;width:108px;height:40px;border-radius:99px;border:1.5px solid var(--ink);background:var(--bg)!important;font-size:12px;font-weight:800;letter-spacing:.16em;cursor:pointer;appearance:none}
+.gc .gc-l{position:absolute;top:50%;transform:translateY(-50%);color:var(--mute)!important}
+.gc .gc-a{left:16px}.gc .gc-b{right:18px}
+.gc .gc-k{position:absolute;top:3px;left:3px;width:54px;height:30px;border-radius:99px;background:var(--blue)!important;color:#fff!important;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.gc[data-mode="on"] .gc-k{transform:translateX(46px)}
+.gc .gc-in{max-width:1000px;margin:0 auto;padding:0 20px 40px}
+.gc .gc-guild{margin-top:40px}
+.gc .gc-gh{display:flex;align-items:center;gap:10px;border-bottom:3px solid var(--ink);padding-bottom:10px}
+.gc .gc-gi{font-size:11px;font-weight:800;letter-spacing:.2em;color:var(--bt)!important;white-space:nowrap}
+.gc .gc-gname{flex:1;min-width:0;font-size:26px;font-weight:800;letter-spacing:-.03em;line-height:1.3}
+.gc .gc-cards{display:grid;gap:20px;margin-top:20px}
+.gc .gc-card{border:1px solid var(--line);background:var(--card)!important}
+.gc .gc-ch{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);border-left:4px solid var(--blue)}
+.gc .gc-cname{flex:1;min-width:0;font-size:18px;font-weight:800;line-height:1.4}
+.gc .gc-cb{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr)}
+.gc .gc-photo{position:relative;display:block;width:100%;aspect-ratio:4/5;overflow:hidden;border:0;background:linear-gradient(160deg,#9fe7ee,#c9c4f2 45%,#f6d3e4)!important}
+.gc[data-mode="off"] .gc-photo{background:linear-gradient(160deg,#243553,#3a2f5c 55%,#4a2c45)!important}
+.gc .gc-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;border:0}
+.gc .gc-photo span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13px;font-weight:800;color:rgba(255,255,255,.9)!important;padding:10px}
+.gc .gc-pm{padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.gc .gc-pt{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.gc .gc-pl{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--bt)!important}
+.gc .gc-copy{border:1.5px solid var(--blue);border-radius:0;background:var(--blue)!important;color:#fff!important;font-size:13px;font-weight:800;padding:8px 18px;cursor:pointer;appearance:none}
+.gc .gc-ptxt{flex:1;min-height:180px;width:100%;border:0;border-left:4px solid var(--blue);background:var(--soft)!important;padding:14px 16px;font-size:14px;line-height:1.8;white-space:pre-wrap;word-break:break-word}
+@media(max-width:640px){.gc .gc-in{padding:0 14px 40px}.gc .gc-cb{grid-template-columns:1fr}.gc .gc-photo{aspect-ratio:1/1}.gc .gc-gname{font-size:22px}}
+</style>
+<style id="edit">
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0}
+.gc{min-height:100vh}
+.gc .gc-top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;flex-wrap:wrap}
+.gc .gc-tools{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-left:auto}
+.gc .gc-msg{font-size:12px;font-weight:700;color:var(--bt)!important}
+.gc .gc-mini{border:1.5px solid var(--ink);border-radius:0;background:none;font-size:12px;font-weight:800;padding:6px 10px;white-space:nowrap;cursor:pointer}
+.gc .gc-mini.pri{background:var(--blue);border-color:var(--blue);color:#fff!important}
+.gc .gc-mini.sm{border-color:var(--line);color:var(--mute)!important}
+.gc .gc-mini.sm:hover{border-color:var(--blue);color:var(--bt)!important}
+.gc input.gc-gname,.gc input.gc-cname{border:0;background:none;outline:none}
+.gc input.gc-gname:focus,.gc input.gc-cname:focus{box-shadow:0 2px 0 var(--blue)}
+.gc .gc-tag{font-size:10px;font-weight:800;letter-spacing:.12em;background:var(--blue);color:#fff!important;padding:2px 7px}
+.gc button.gc-photo{cursor:pointer}
+.gc button.gc-photo:hover::after{content:"사진 변경";position:absolute;left:0;right:0;bottom:0;padding:8px;background:var(--blue);color:#fff;font-size:12px;font-weight:800;text-align:center}
+.gc textarea.gc-ptxt{resize:vertical;outline:none;display:block}
+.gc .gc-copy.done{background:transparent!important;color:var(--bt)!important;border-color:var(--bt)}
+.gc .gc-add{display:block;width:100%;margin-top:14px;border:1.5px dashed var(--blue);background:none;font-weight:800;font-size:13px;padding:11px;cursor:pointer;color:var(--bt)!important}
+.gc .gc-add:hover{background:var(--soft)}
+.gc .gc-addg{margin-top:40px;border-width:2px;padding:16px;font-size:14px}
+</style>
+</head>
+<body>
+<div class="gc" id="app" data-mode="on">
+  <div class="gc-top">
+    <div class="gc-brand"><b>GUILD</b> CARDS</div>
+    <div class="gc-tools"><span class="gc-msg" id="msg"></span><button class="gc-mini" id="bLoad">불러오기</button><button class="gc-mini" id="bJson">JSON 저장</button><button class="gc-mini pri" id="bCode">티스토리용 복사</button></div>
+    <button class="gc-sw" id="sw" role="switch" aria-checked="false" aria-label="OFF / ON 전환"><span class="gc-l gc-a">OFF</span><span class="gc-l gc-b">ON</span><span class="gc-k" id="k">ON</span></button>
+  </div>
+  <main class="gc-in" id="root"></main>
+</div>
+<input type="file" id="file" accept="image/*" hidden>
+<input type="file" id="jsonIn" accept=".json,application/json" hidden>
+
+<script type="text/plain" id="v-js">
+(function(){
+var r=document.getElementById('__ID__');if(!r)return;
+var sw=r.querySelector('.gc-sw'),k=r.querySelector('.gc-k');
+sw.onclick=function(){var m=r.getAttribute('data-mode')==='on'?'off':'on';r.setAttribute('data-mode',m);sw.setAttribute('aria-checked',m==='on');k.textContent=m.toUpperCase();};
+r.addEventListener('click',function(e){
+var b=e.target.closest?e.target.closest('.gc-copy'):null;if(!b)return;
+var t=b.closest('.gc-pm').querySelector('.gc-p.x-'+r.getAttribute('data-mode')).textContent;
+var ok=function(){b.textContent='복사됨 ✓';setTimeout(function(){b.textContent='복사';},1400);};
+var fb=function(){var a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();try{document.execCommand('copy');ok();}catch(x){}document.body.removeChild(a);};
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fb);}else{fb();}
+});
+})();
+</script>
+
+<script>
+(function(){
+  var KEY='guild-cards-v1',$=function(i){return document.getElementById(i)};
+  var uid=function(){return Math.random().toString(36).slice(2,9)};
+  var nc=function(n){n=n||'새 캐릭터';return{id:uid(),nm:{off:n,on:n},im:{off:'',on:''},off:'',on:''}};
+  var S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+  if(!S||!Array.isArray(S.guilds)){
+    var c1=nc('캐릭터 이름');c1.off='여기에 OFF 상태 프롬프트를 적으세요.';c1.on='여기에 ON 상태 프롬프트를 적으세요.';
+    S={mode:(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'off':'on',guilds:[
+      {id:uid(),name:'첫 번째 길드',chars:[c1]},{id:uid(),name:'두 번째 길드',chars:[nc('캐릭터 이름')]}]};
+  }
+  S.guilds.forEach(function(g){g.chars.forEach(function(c){if(!c.nm)c.nm={off:c.name||'',on:c.name||''};delete c.name;if(!c.im)c.im={off:c.img||'',on:c.img||''};delete c.img})});
+  var timer;
+  function save(){clearTimeout(timer);timer=setTimeout(function(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}},300)}
+  var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+  var root=$('root'),fileIn=$('file'),jsonIn=$('jsonIn'),pick=null,msg=$('msg'),mt;
+  function flash(t){msg.textContent=t;clearTimeout(mt);mt=setTimeout(function(){msg.textContent=''},3500)}
+  function find(gid,cid){var g=S.guilds.filter(function(x){return x.id===gid})[0];if(!g)return{};
+    return{g:g,c:cid?g.chars.filter(function(x){return x.id===cid})[0]:null}}
+
+  function render(){
+    var m=S.mode,M=m.toUpperCase();
+    $('app').setAttribute('data-mode',m);$('sw').setAttribute('aria-checked',m==='on');$('k').textContent=M;
+    root.innerHTML=S.guilds.map(function(g,gi){
+      return '<section class="gc-guild" data-g="'+g.id+'"><div class="gc-gh"><span class="gc-gi">GUILD '+String(gi+1).padStart(2,'0')+'</span>'+
+        '<input class="gc-gname" data-f="gname" value="'+esc(g.name)+'" placeholder="길드 이름">'+
+        '<button class="gc-mini sm" data-a="delg">길드 삭제</button></div><div class="gc-cards">'+
+        g.chars.map(function(c){
+          return '<article class="gc-card" data-c="'+c.id+'"><div class="gc-ch"><span class="gc-tag">'+M+'</span><input class="gc-cname" data-f="cname" value="'+esc(c.nm[m])+'" placeholder="'+M+' 이름">'+
+            '<button class="gc-mini sm" data-a="delc">삭제</button></div><div class="gc-cb">'+
+            '<button class="gc-photo" data-a="img" aria-label="사진 넣기">'+(c.im[m]?'<img src="'+c.im[m]+'" alt="">':'<span>＋ '+M+' 사진 넣기</span>')+'</button>'+
+            '<div class="gc-pm"><div class="gc-pt"><span class="gc-pl">'+M+' 프롬프트</span><button class="gc-copy" data-a="copy">복사</button></div>'+
+            '<textarea class="gc-ptxt" data-f="prompt" placeholder="'+M+' 상태에서 쓸 프롬프트를 붙여넣으세요">'+esc(c[m])+'</textarea></div></div></article>';
+        }).join('')+'</div><button class="gc-add" data-a="addc">＋ 캐릭터 추가</button></section>';
+    }).join('')+'<button class="gc-add gc-addg" data-a="addg">＋ 길드 추가</button>';
+  }
+
+  $('sw').onclick=function(){S.mode=S.mode==='on'?'off':'on';save();render()};
+
+  root.addEventListener('input',function(e){
+    var f=e.target.getAttribute('data-f');if(!f)return;
+    var gs=e.target.closest('.gc-guild'),cs=e.target.closest('.gc-card');
+    var r=find(gs.getAttribute('data-g'),cs&&cs.getAttribute('data-c'));
+    if(f==='gname')r.g.name=e.target.value;
+    else if(f==='cname')r.c.nm[S.mode]=e.target.value;
+    else if(f==='prompt')r.c[S.mode]=e.target.value;
+    save();
+  });
+
+  async function copyText(t){
+    try{await navigator.clipboard.writeText(t);return true}catch(e){}
+    try{var a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();var ok=document.execCommand('copy');document.body.removeChild(a);return ok}catch(e){return false}
+  }
+  function showBox(code){
+    var o=document.createElement('div');
+    o.style.cssText='position:fixed;inset:0;z-index:99;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:20px';
+    o.innerHTML='<div style="background:#fff;color:#000;padding:16px;width:100%;max-width:640px"><p style="font-size:13px;margin-bottom:8px">자동 복사가 막혀 있어요. 아래 코드를 전체 선택해서 복사하세요.</p><textarea readonly style="width:100%;height:50vh;font-size:12px"></textarea><button style="margin-top:8px;padding:8px 16px">닫기</button></div>';
+    var ta=o.querySelector('textarea');ta.value=code;
+    o.querySelector('button').onclick=function(){o.remove()};
+    document.body.appendChild(o);ta.focus();ta.select();
+  }
+
+  root.addEventListener('click',function(e){
+    var b=e.target.closest('[data-a]');if(!b)return;
+    var a=b.getAttribute('data-a'),gs=b.closest('.gc-guild'),cs=b.closest('.gc-card');
+    var r=gs?find(gs.getAttribute('data-g'),cs&&cs.getAttribute('data-c')):{};
+    if(a==='addg'){S.guilds.push({id:uid(),name:'새 길드',chars:[nc()]})}
+    else if(a==='delg'){if(!confirm('이 길드와 안의 캐릭터가 모두 삭제돼요. 계속할까요?'))return;S.guilds=S.guilds.filter(function(g){return g!==r.g})}
+    else if(a==='addc'){r.g.chars.push(nc())}
+    else if(a==='delc'){if(!confirm('이 캐릭터를 삭제할까요?'))return;r.g.chars=r.g.chars.filter(function(c){return c!==r.c})}
+    else if(a==='img'){pick=r;pick.m=S.mode;fileIn.value='';fileIn.click();return}
+    else if(a==='copy'){copyText(cs.querySelector('textarea').value).then(function(ok){b.textContent=ok?'복사됨 ✓':'복사 실패';b.classList.add('done');setTimeout(function(){b.textContent='복사';b.classList.remove('done')},1400)});return}
+    save();render();
+  });
+
+  fileIn.onchange=function(){
+    var f=fileIn.files[0];if(!f||!pick||!pick.c)return;
+    var target=pick.c,pm=pick.m,rd=new FileReader();
+    rd.onload=function(){var im=new Image();im.onload=function(){
+      var s=Math.min(1,600/Math.max(im.width,im.height)),cv=document.createElement('canvas');
+      cv.width=Math.round(im.width*s);cv.height=Math.round(im.height*s);
+      cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);
+      target.im[pm]=cv.toDataURL('image/jpeg',.8);save();render();
+    };im.src=rd.result};
+    rd.readAsDataURL(f);
+  };
+
+  async function saveFile(name,data){
+    var d=null;
+    try{if(window.claude&&claude.use)d=await claude.use('downloads')}catch(e){}
+    if(d){try{await d.save({filename:name,data:data});flash('저장했어요')}catch(e){if(!e||e.code!=='declined')flash('저장 실패')}return}
+    var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data]));a.download=name;
+    document.body.appendChild(a);a.click();a.remove();flash('저장했어요');
+  }
+  function clean(o){
+    if(!o||!Array.isArray(o.guilds))return null;
+    var t=function(v){return typeof v==='string'?v:''};
+    return{mode:o.mode==='off'?'off':'on',guilds:o.guilds.map(function(g){
+      return{id:uid(),name:t(g&&g.name),chars:(g&&Array.isArray(g.chars)?g.chars:[]).map(function(c){
+        var ok=function(v){v=t(v);return /^data:image\/[a-z+.-]+;base64,[A-Za-z0-9+\/=]+$/.test(v)?v:''},n=c&&c.nm||{},mi=c&&c.im||{},o1=ok(c&&c.img);
+        return{id:uid(),nm:{off:t(n.off||(c&&c.name)),on:t(n.on||(c&&c.name))},im:{off:ok(mi.off)||o1,on:ok(mi.on)||o1},off:t(c&&c.off),on:t(c&&c.on)};
+      })};
+    })};
+  }
+  $('bJson').onclick=function(){saveFile('guild-cards.json',JSON.stringify({mode:S.mode,guilds:S.guilds},null,1))};
+  $('bLoad').onclick=function(){jsonIn.value='';jsonIn.click()};
+  jsonIn.onchange=function(){
+    var f=jsonIn.files[0];if(!f)return;
+    var rd=new FileReader();
+    rd.onload=function(){
+      var n=null;try{n=clean(JSON.parse(rd.result))}catch(e){}
+      if(!n){flash('불러오기 실패: 형식이 달라요');return}
+      if(!confirm('현재 내용을 불러온 파일로 덮어쓸까요?'))return;
+      S=n;save();render();flash('불러왔어요');
+    };
+    rd.readAsText(f);
+  };
+
+  var XCSS='.gc .gc-ptxt{max-height:420px;overflow:auto}';
+  function ph(c){
+    var a=c.im.off,b=c.im.on;
+    if(!a&&!b)return '<span>NO IMAGE</span>';
+    if(a===b)return '<img src="'+a+'" alt="">';
+    return (a?'<img class="x-off" src="'+a+'" alt="">':'<span class="x-off">NO IMAGE</span>')+(b?'<img class="x-on" src="'+b+'" alt="">':'<span class="x-on">NO IMAGE</span>');
+  }
+  function build(){
+    var id='gc'+uid(),m=S.mode,P=function(s){return esc(s).replace(/\r?\n/g,'&#10;')};
+    var html='<div class="gc" id="'+id+'" data-mode="'+m+'"><div class="gc-top"><div class="gc-brand"><b>GUILD</b> CARDS</div>'+
+      '<button type="button" class="gc-sw" role="switch" aria-checked="'+(m==='on')+'" aria-label="OFF / ON 전환"><span class="gc-l gc-a">OFF</span><span class="gc-l gc-b">ON</span><span class="gc-k">'+m.toUpperCase()+'</span></button></div><div class="gc-in">'+
+      S.guilds.map(function(g,gi){
+        return '<div class="gc-guild"><div class="gc-gh"><span class="gc-gi">GUILD '+String(gi+1).padStart(2,'0')+'</span><div class="gc-gname">'+esc(g.name)+'</div></div><div class="gc-cards">'+
+        g.chars.map(function(c){
+          return '<div class="gc-card"><div class="gc-ch"><div class="gc-cname"><span class="x-off">'+esc(c.nm.off)+'</span><span class="x-on">'+esc(c.nm.on)+'</span></div></div><div class="gc-cb">'+
+            '<div class="gc-photo">'+ph(c)+'</div>'+
+            '<div class="gc-pm"><div class="gc-pt"><span class="gc-pl"><span class="x-off">OFF 프롬프트</span><span class="x-on">ON 프롬프트</span></span><button type="button" class="gc-copy">복사</button></div>'+
+            '<div class="gc-ptxt"><div class="gc-p x-off">'+P(c.off)+'</div><div class="gc-p x-on">'+P(c.on)+'</div></div></div></div></div>';
+        }).join('')+'</div></div>';
+      }).join('')+'</div></div>';
+    var min=function(s){return s.replace(/\s*\n\s*/g,'')};
+    return '<style>'+min($('css').textContent+XCSS)+'</style>'+html+'<script>'+min($('v-js').textContent.replace('__ID__',id))+'<\/script>';
+  }
+  $('bCode').onclick=function(){
+    var code=build(),kb=Math.round(code.length/1024);
+    copyText(code).then(function(ok){if(ok)flash('복사됨 ('+kb+'KB) · 티스토리 HTML 모드에 붙여넣기');else{flash('자동 복사 실패');showBox(code)}});
+  };
+
+  render();
+})();
+</script>
+</body>
+</html>
